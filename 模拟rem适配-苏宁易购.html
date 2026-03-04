@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>模拟rem+less适配-苏宁易购-Made By CappuccinoRose</title>
+    <link rel="shortcut icon" href="//www.suning.com/favicon.ico" type="image/x-icon">
+    <link href="//res.suning.cn/project/cmsWeb/suning/wap/images/suning-icon-114-114.png"
+        rel="apple-touch-icon-precomposed">
+    <meta name="keywords" content="苏宁手机_苏宁电脑_苏宁智能_笔记本_iPhone_华为_vivo_荣耀_小米_微软_联想_华硕">
+    <meta name="description"
+        content="【苏宁3C】阵地集合『手机』『电脑』『数码配件』等品类，集合各大牌iPhone⊙华为⊙荣耀⊙IQOO⊙小米⊙三星⊙联想⊙惠普⊙华硕⊙微软⊙佳能等，更有多种玩法『花呗』『优惠券』『抽奖』『秒杀』『试用』『新品』等你来抢">
+    <style>
+        /* 
+  rem方式，750px 为高保真基准，原高保真大小除以基数50，即 10px/50 = 0.2rem，以此类推,字体还是 px
+ */
+
+        html {
+            font-size: 50px;
+        }
+
+        body {
+            font-size: 24px;
+        }
+
+        @media screen and (min-width:320px) {
+            html {
+                font-size: 21.333333333333332px;
+            }
+
+            body {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (min-width:360px) {
+            html {
+                font-size: 24px;
+            }
+
+            body {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (min-width:375px) {
+            html {
+                font-size: 25px;
+            }
+
+            body {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (min-width:384px) {
+            html {
+                font-size: 25.6px;
+            }
+
+            body {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (min-width:400px) {
+            html {
+                font-size: 26.666666666666668px;
+            }
+
+            body {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (min-width:414px) {
+            html {
+                font-size: 27.6px;
+            }
+
+            body {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (min-width:424px) {
+            html {
+                font-size: 28.266666666666667px;
+            }
+
+            body {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (min-width:480px) {
+            html {
+                font-size: 32px;
+            }
+
+            body {
+                font-size: 15.36px;
+            }
+        }
+
+        @media screen and (min-width:540px) {
+            html {
+                font-size: 36px;
+            }
+
+            body {
+                font-size: 17.28px;
+            }
+        }
+
+        @media screen and (min-width:720px) {
+            html {
+                font-size: 48px;
+            }
+
+            body {
+                font-size: 23.04px;
+            }
+        }
+
+        @media screen and (min-width:750px) {
+            html {
+                font-size: 50px;
+            }
+
+            body {
+                font-size: 24px;
+            }
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 100%;
+            font-weight: 500;
+        }
+
+        ul,
+        ol,
+        li {
+            list-style: none;
+        }
+
+        em,
+        i {
+            font-style: normal;
+        }
+
+        del {
+            text-decoration: line-through;
+        }
+
+        address,
+        caption,
+        cite,
+        code,
+        dfn,
+        em,
+        th,
+        var {
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        img {
+            border: 0;
+            width: 100%;
+        }
+
+        input,
+        img {
+            vertical-align: middle;
+        }
+
+        input:focus,
+        a:focus {
+            outline: none;
+        }
+
+        a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        /* a:active{opacity:.7;} */
+        * {
+            outline: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: none;
+            overflow-y: scroll;
+        }
+
+        /* Site Global */
+        body {
+            width: 15rem;
+            min-width: 320px;
+            line-height: 1.5;
+            margin: 0 auto !important;
+            color: #333333;
+            font-family: Arial, Helvetica, STHeiTi, sans-serif;
+            background: #f2f2f2;
+            padding-bottom: 3rem;
+        }
+
+        /*                                                     上面 */
+        header {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* 广告 100px*/
+        header .ad {
+            position: relative;
+            width: 15rem;
+            height: 2rem;
+            background: url('https://image.suning.cn/uimg/cms/img/165448785468511420.gif') no-repeat;
+            background-size: 15rem;
+        }
+
+        header .ad a:first-child {
+            width: 1rem;
+            height: 1rem;
+            position: absolute;
+            z-index: 100;
+            background: url('https://oss.suning.com/vss/activity/wximg/magic/thkinhat/images/head-close.png') no-repeat;
+            background-size: 0.6rem;
+            top: 0.7rem;
+            left: 0.5rem;
+        }
+
+        header .ad a:last-child {
+            width: 4rem;
+            height: .9rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 1.1rem;
+            z-index: 100;
+        }
+
+        /* 头部 150px */
+        header .header {
+            width: 15rem;
+            height: 3rem;
+            background: url('https://image2.suning.cn/uimg/cms/img/172222020889243114.jpg?format=is') no-repeat 0 -2.5rem;
+            background-size: 15rem;
+            padding-top: 1rem;
+        }
+
+        header .header nav {
+            width: 15rem;
+            height: .9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        header .header nav.fixed {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15rem;
+            height: 2rem;
+            z-index: 100;
+            background: url('https://image2.suning.cn/uimg/cms/img/172222020889243114.jpg?format=is') no-repeat 0 -2.5rem;
+            background-size: 15rem;
+        }
+
+        header .header nav>a:first-child {
+            margin-left: .48rem;
+            width: .42rem;
+            height: .42rem;
+            background: url('https://res.suning.cn/project/cmsWeb/suning/newwap/TYPD/images/back.png') no-repeat;
+            background-size: .42rem .42rem;
+        }
+
+        header .header nav .middle {
+            flex: 1;
+            display: flex;
+            height: 100%;
+        }
+
+        header .header .middle .search-btn {
+            display: block;
+            position: relative;
+            width: 50%;
+            height: 60%;
+            margin: .4rem 0 0 .4rem;
+            border-radius: .2rem;
+            background-color: #f2f2f2;
+        }
+
+        header .header .middle .search-btn img {
+            width: .36rem;
+            height: .36rem;
+            position: absolute;
+            left: .3rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        header .header .middle .search-btn .search-word {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: .9;
+            font-family: PingFangSC-Regular;
+            font-size: .4rem;
+            color: #999;
+            white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+
+        header .header nav .middle .slogan {
+            width: 3.5rem;
+            margin-left: 0.6rem;
+            background: url('https://image1.suning.cn/uimg/cms/img/169318830499052267.png') no-repeat;
+            background-size: 3.5rem;
+        }
+
+        header .header nav .middle .attention {
+            width: 2rem;
+            margin-left: .5rem;
+        }
+
+        header .header nav .middle .attention a {
+            width: 100%;
+            height: 100%;
+        }
+
+        header .header nav .cart {
+            margin-right: 0.7rem;
+        }
+
+        header .header nav .more {
+            margin-right: .2rem;
+        }
+
+        header .header nav .cart a,
+        header .header nav .more a {
+            display: inline-block;
+            width: .84rem;
+            height: .84rem;
+        }
+
+        header .header .search {
+            width: 100%;
+            height: 1rem;
+            padding: .2rem 0 .1rem;
+        }
+
+        header .header .search .search-btn {
+            display: block;
+            position: relative;
+            width: 90%;
+            height: 100%;
+            margin: 0 auto;
+            border-radius: .2rem;
+            background-color: #f2f2f2;
+        }
+
+        header .header .search .search-btn img {
+            width: .36rem;
+            height: .36rem;
+            position: absolute;
+            left: .3rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        header .header .search .search-btn .search-word {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: .9;
+            font-family: PingFangSC-Regular;
+            font-size: .4rem;
+            color: #999;
+            white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /*                                              中间 */
+        .banner {
+            width: 100%;
+            padding: .2rem 0;
+            background-image: -webkit-linear-gradient(#ff0020, #ff001e, white);
+        }
+
+        /* 轮播图最外层盒子 */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            margin: 0 .5rem .2rem;
+            height: 5rem;
+            border-radius: .5rem;
+            overflow: hidden;
+        }
+
+        .carousel ul li {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 5rem;
+            /* 使用 transform:translaX(300%) 暂时将 li 移动到屏幕外面去*/
+            -webkit-transform: translateX(300%);
+            transform: translateX(300%);
+
+        }
+
+        .carousel ul li a img {
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* ie8 */
+
+            display: block;
+
+            -ms-interpolation-mode: bicubic;
+            /*为了照顾ie图片缩放失真*/
+
+        }
+
+        /* 小圆点盒子 */
+
+        .carousel .points {
+
+            /* 未知宽度的盒子，使用 absolute 定位，结合 transform 的方式进行居中 */
+
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+        }
+
+        /* 小圆点 */
+
+        .carousel .points li {
+            width: .3rem;
+            height: .2rem;
+            border-radius: .1rem;
+            border: .02rem solid white;
+            float: left;
+            margin: 0 .04rem;
+            background-color: #bdbbbb;
+        }
+
+        /* 选中小圆点的样式类 */
+
+        .carousel .points li.active {
+            background-color: white;
+        }
+
+        /* link */
+        .banner .link {
+            display: flex;
+            margin: 0 .5rem;
+            height: 3.5rem;
+            border-radius: .5rem;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .link a {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .link a img {
+            width: 1.6rem;
+        }
+
+        .link a span {
+            margin: .2rem auto 0;
+            font-size: .5rem;
+            color: #222246;
+        }
+
+        /* --------------------------------------------展示 */
+        .show div[class^="show"] {
+            width: 15rem;
+            margin: 0 auto;
+            border-radius: .2rem;
+            background-color: #f2f2f2;
+            overflow: hidden;
+        }
+
+        .show div[class^="show"] h1 {
+            height: 1.5rem;
+        }
+
+        .show div[class^="show"]>ul {
+            width: 50rem;
+            height: 8rem;
+            margin-left: .5rem;
+            padding: 0;
+        }
+
+        .show div[class^="show"]>ul li {
+            float: left;
+            width: 5rem;
+            height: 100%;
+            margin-left: .2rem;
+            border-radius: .2rem;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .show div[class^="show"]>ul li a {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+        }
+
+        .show div[class^="show"]>ul li a img {
+            width: 100%;
+            height: 5rem;
+        }
+
+        .show div[class^="show"]>ul li a p {
+            width: 100%;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            /* 限制在2行 */
+            white-space: normal;
+            text-align: center;
+            margin: .2rem 0;
+            font-size: .35rem;
+            color: #222246;
+        }
+
+        /* For browsers that support -webkit-line-clamp */
+        @supports (-webkit-line-clamp: 2) {
+            .show div[class^="show"]>ul li a p {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .show div[class^="show"]>ul li a .mark {
+            color: white;
+            height: .35rem;
+        }
+
+        .show div[class^="show"]>ul li a .mark span {
+            padding: .1rem;
+            font-size: .30rem;
+            border-radius: .2rem;
+            background-color: #ff5500;
+        }
+
+        .show div[class^="show"]>ul li a .price {
+            text-align: center;
+            margin: .2rem 0;
+            font-size: .5rem;
+            color: red;
+        }
+
+        .show div[class^="show"]>ul li a .price .symbol {
+            font-size: .4rem;
+        }
+
+        .show div[class^="show"]>ul li a .price .number {
+            font-size: .6rem;
+            font-weight: bold;
+        }
+
+        .show4 ul {
+            height: 6rem !important;
+
+        }
+
+        .show4 ul li {
+            width: 4rem !important;
+            height: 100% !important;
+            background-color: transparent !important;
+        }
+
+        .show4 ul li a img {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .show5 a {
+            display: block;
+            width: 90%;
+            height: 6.1rem;
+            margin: 0 auto;
+            border-radius: .2rem;
+            overflow: hidden;
+
+        }
+
+        /* 左边 */
+        .show5 .left {
+            float: left;
+            width: 45%;
+            height: 100%;
+            position: relative;
+        }
+
+        .show5 .left .watch {
+            position: absolute;
+            top: .2rem;
+            left: .15rem;
+            width: 2rem;
+            height: .8rem;
+            background: url('https://res.suning.cn/project/cmsWeb/suning/newwap/TYPD/images/playback.png') no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .show5 .left p {
+            height: 1rem;
+            width: 100%;
+            position: absolute;
+            bottom: -0.3rem;
+            font-size: .32rem;
+            color: white;
+            padding-left: .3rem;
+            padding-top: .2rem;
+            background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+        }
+
+        /* 右边 */
+        .show5 .right {
+            float: left;
+            width: 46%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+
+        .show5 .right p:first-child {
+            flex: 30%;
+            margin-left: .25rem;
+        }
+
+        .show5 .right>div {
+            flex: 20%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .show5 .right>div img {
+            width: 0.6rem;
+            height: 0.6rem;
+            margin-left: .45rem;
+            margin-right: .4rem;
+            margin-top: .3rem;
+        }
+
+        .show5 .right>div p {
+            font-size: .35rem;
+            color: #222246;
+        }
+
+        .show5 .right>ul {
+            flex: 45%;
+            padding: 0;
+            display: flex;
+            margin-top: .2rem;
+        }
+
+        .show5 .right>ul li {
+            flex: 1;
+            text-align: center;
+            margin: 0 .1rem;
+            color: red;
+            border-radius: .2rem;
+            overflow: hidden;
+        }
+
+        .show5 .right>ul li:last-child {
+
+            background-color: #fdeeed;
+        }
+
+        .show5 .right>ul li:last-child .moreNumber {
+            margin: .3rem auto 0;
+            font-size: .6rem;
+        }
+
+        .show5 .right>ul li:last-child .text {
+            margin: 0 auto;
+            font-size: .4rem;
+        }
+
+        .show6 ol.nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding-left: 0;
+            margin: 0 .5rem;
+            text-align: center;
+            cursor: default;
+        }
+
+        .show6 ol.fixed {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            width: 15rem;
+            margin: 0;
+            transform: translateX(-50%);
+            display: flex;
+            flex-wrap: wrap;
+            padding-left: 0;
+            text-align: center;
+            cursor: default;
+            background: white;
+        }
+
+        .show6 ol.nav li {
+            width: 2.5rem;
+            height: 1rem;
+            margin: .1rem 0;
+            padding-top: .1rem;
+            background-color: white;
+            border-radius: .2rem;
+        }
+
+        .show6 ol.nav li.fixed {
+            width: 2.5rem;
+            height: 1rem;
+            margin: .1rem .2rem;
+            padding-top: .1rem;
+            background-color: rgba(0, 0, 0, .1);
+            color: black;
+        }
+
+        .show6 div[class^='box'] {
+            height: 30rem;
+            width: 15rem;
+            text-align: center;
+            line-height: 3rem;
+            background-image: -webkit-linear-gradient(#9acb9a, rgb(212, 164, 164));
+            display: none;
+            color: #222246;
+        }
+
+        .show6 div[class^='box'].active {
+            display: block;
+        }
+
+        .show .footer {
+            width: 70%;
+        }
+
+        .show .footer img {
+            margin: 5% 17%;
+        }
+
+        /*-----------------------------------------------尾部 */
+        footer.link {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15rem;
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            padding: .2rem 0;
+        }
+
+        footer.link a img {
+            width: 0.9rem;
+        }
+
+        footer.link a span {
+            font-size: .4rem;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="ad">
+            <a href=""></a>
+            <a href=""></a>
+        </div>
+        <div class="header">
+            <nav>
+                <a href="">
+                </a>
+                <div class="middle">
+                    <div class="slogan">
+                    </div>
+                    <div class="attention">
+                        <a href="">
+                            <img src="https://res.suning.cn/project/cmsWeb/suning/newwap/TYPD/images/followW.png">
+                        </a>
+                    </div>
+                </div>
+                <div class="cart">
+                    <a href="https://shopping.suning.com/project/cart/cart1.html">
+                        <img src="https://res.suning.cn/project/cmsWeb/suning/newwap/TYPD/images/cart.png"></a>
+                </div>
+                <div class="more">
+                    <a href=""><img src="https://res.suning.cn/project/cmsWeb/suning/newwap/TYPD/images/more.png"></a>
+                </div>
+            </nav>
+
+            <div class="search">
+                <a class="search-btn" href="https://m.suning.com/search.html?ch=99999988">
+                    <img src="https://res.suning.cn/project/cmsWeb/suning/newwap/TYPD/images/search.png">
+                    <span class="search-word">iPhone 15</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <section class="banner">
+        <div class="carousel">
+            <ul>
+                <li><a
+                        href="https://cuxiao.m.suning.com/scms/221024.html?adTypeCode=1137&adId=https%3A%2F%2Flib.suning.com%2Fweex%2F221024.js%3FpageCode%3D221024%26isSCMS%3D1&safp=f73ee1cf.Wan3C.126481435222.1&safpn=10003.00006">
+                        <img src="https://image2.suning.cn/uimg/cms/img/172249724867925317.png?format=is"></a></li>
+                <li><a
+                        href="https://cuxiao.m.suning.com/scms/3CPOP.html?adTypeCode=1137&adId=https%3A%2F%2Flib.suning.com%2Fweex%2F3CPOP.js%3FpageCode%3D3CPOP%26isSCMS%3D1&safp=f73ee1cf.Wan3C.126481435222.f7fed1d4af&safpn=10003.00006">
+                        <img src="https://image2.suning.cn/uimg/cms/img/172258743406123633.png?format=is"></a></li>
+                <li><a
+                        href="https://cuxiao.m.suning.com/scms/wapIntel2.html?safp=f73ee1cf.Wan3C.126481435222.f7fed1d4af&safpn=10003.00006">
+                        <img src="https://image1.suning.cn/uimg/cms/img/172181198747192758.png?format=is" alt=""></a>
+                </li>
+                <li><a
+                        href="https://cuxiao.m.suning.com/scms/Apple_2024818.html?adTypeCode=1137&adId=https%3A%2F%2Flib.suning.com%2Fweex%2FApple_2024818.js%3FpageCode%3DApple_2024818%26isSCMS%3D1&safp=f73ee1cf.Wan3C.126481435222.f7fed1d4af&safpn=10003.00006">
+                        <img src="https://image3.suning.cn/uimg/cms/img/172223455828734895.png?format=is" alt=""></a>
+                </li>
+                <li><a
+                        href="https://mpp.m.suning.com/scms/Apple_Super.html?adTypeCode=1137&adId=https%3A%2F%2Flib.suning.com%2Fweex%2FApple_Super.js%3FpageCode%3DApple_Super%26isSCMS%3D1">
+                        <img src="https://image1.suning.cn/uimg/cms/img/172249962732972987.png?format=is"></a></li>
+                <li><a
+                        href="https://m.suning.com/product/0000000000/12434191401.html?safp=f73ee1cf.Wan3C.126481435222.f7fed1d4af&safc=prd.0.0&safpn=10003.00006">
+                        <img src="https://image2.suning.cn/uimg/cms/img/172181223517887485.png?format=is"></a>
+                </li>
+                <li><a
+                        href="https://passport.suning.com/ids/login?loginTheme=wap_new&service=https:%2F%2Faq.suning.com%2Fasc%2Fauth%3FtargetUrl%3Dhttps%253A%252F%252Fc.m.suning.com%252Fcollect_card.html%253FwydCardSku%253D1721716798136860%2526channelCode%253D00001%2526safp%253Df73ee1cf.Wan3C.126481435222.f7fed1d4af%2526safpn%253D10003.00006%2523redirect%2526channelCode%253D00005"><img
+                            src="https://image2.suning.cn/uimg/cms/img/172189234224576283.png?format=is"></a>
+                </li>
+                <li><a
+                        href="https://m.suning.com/product/0000000000/12434084602.html?safp=f73ee1cf.Wan3C.126481435222.f7fed1d4af&safc=prd.0.0&safpn=10003.00006">
+                        <img src="https://image3.suning.cn/uimg/cms/img/172181218997376580.png?format=is" alt=""></a>
+                </li>
+
+            </ul>
+            <ol class="points">
+            </ol>
+        </div>
+        <div class="link">
+            <a href="https://c.m.suning.com/2021shouji2.html">
+                <img src="https://image2.suning.cn/uimg/cms/img/169348172812184261.png?format=is">
+                <span>手机通讯</span>
+            </a>
+            <a href="https://m.suning.com/search/%E7%AC%94%E8%AE%B0%E6%9C%AC/">
+                <img src="https://image2.suning.cn/uimg/cms/img/169348173585150455.png?format=is">
+                <span>大牌电脑</span>
+            </a>
+            <a
+                href="https://cuxiao.m.suning.com/scms/YYSHD04.html?adTypeCode=1137&adId=https%3A%2F%2Flib.suning.com%2Fweex%2FYYSHD04.js%3FpageCode%3DYYSHD04%26isSCMS%3D1">
+                <img src="https://image1.suning.cn/uimg/cms/img/171204578224168757.png?format=is">
+                <span>特惠号卡</span>
+            </a>
+            <a
+                href="https://cuxiao.m.suning.com/scms/3Crenew.html?adTypeCode=1137&adId=https%3A%2F%2Flib.suning.com%2Fweex%2F3Crenew.js%3FpageCode%3D3Crenew%26isSCMS%3D1">
+                <img src="https://image3.suning.cn/uimg/cms/img/169348151957082819.png?format=is">
+                <span>手机回收</span>
+            </a>
+            <a href="https://cuxiao.m.suning.com/scms/channel99.html">
+                <img src="https://image3.suning.cn/uimg/cms/img/172118323238310292.png?format=is">
+                <span>9.9秒杀</span>
+            </a>
+        </div>
+    </section>
+    <section class="show">
+        <div class="show1">
+            <h1>
+                <img src="https://image2.suning.cn/uimg/cms/img/169348255070153715.png?format=is" alt="">
+            </h1>
+            <ul>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012434173292.html">
+                        <img src="https://imgservice4.suning.cn/uimg1/b2c/image/DprOqIAY0Y2uaWBVU7T_Tw.jpg?format=400h_400w_4e_80q.webp"
+                            alt="">
+                        <p>
+                            Redmi K70至尊版
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">2899</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012431549120.html">
+                        <img src="https://imgservice3.suning.cn/uimg1/b2c/image/NXyZOs07-_bydcKro4dFBg.jpg?format=400h_400w_4e_80q.webp"
+                            alt="">
+                        <p>
+                            联想小新ProAI元启16英寸
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">6199</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012431535389.html">
+                        <img src="https://imgservice3.suning.cn/uimg1/b2c/image/9NiVo9qesHyaJTg7Qf8qmA.jpg?format=400h_400w_4e_80q.webp"
+                            alt="">
+                        <p>
+                            华为Pura70 12GB+1TB
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">6399</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012425708662.html">
+                        <img src="https://imgservice1.suning.cn/uimg1/b2c/image/1e3cmzQllpCmbmKVHqnuoQ.jpg?format=400h_400w_4e_80q.webp"
+                            alt="">
+                        <p>
+                            华硕天选5 Pro 笔记本
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">7799</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012420007080.html">
+                        <img src="https://imgservice5.suning.cn/uimg1/b2c/image/2rEKUfAc_qIIBid3vIVnWQ.jpg?format=400h_400w_4e_80q.webp"
+                            alt="">
+                        <p>
+                            iPhone 15 Pro 256G 原色钛金属
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">8999</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012433163131.html">
+                        <img src="https://imgservice2.suning.cn/uimg1/b2c/atmosphere/_FaT7n-uniFLDcY2N-9zEg.png?format=400h_400w_4e_80q.webp"
+                            alt="">
+                        <p>
+                            小米14 16+512 白色
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">4299</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012429297655.html">
+                        <img src="https://imgservice4.suning.cn/uimg1/b2c/image/_ur0S6VPWFc0SBeapSTRTg.jpg?format=400h_400w_4e_80q.webp"
+                            alt="">
+                        <p>
+                            联想小新14 2024款
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">3799</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012429632228.html">
+                        <img src="https://imgservice1.suning.cn/uimg1/b2c/image/HpqJ64Fjnv7fvUp7boFCNA.png?format=400h_400w_4e_80q.webp"
+                            alt="">
+                        <p>
+                            Redmi Note 13 8GB+256GB
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">3199</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="show2">
+            <h1>
+                <img src="https://image1.suning.cn/uimg/cms/img/169348207295226521.png?format=is" alt="">
+            </h1>
+            <ul>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012432608480.html">
+                        <img src="https://imgservice4.suning.cn/uimg1/b2c/image/OKZnWjS1_iESwgF2-U-z_A.jpg?format=400h_400w_4e_80q.webp"
+                            alt="">
+                        <p>
+
+                            OPPO Reno12 千禧银
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">1699</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012430710602.html">
+                        <img
+                            src="https://imgservice4.suning.cn/uimg1/b2c/atmosphere/ojTZFXiAajrU6ebQhYSshg.png?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            Redmi Turbo 3 墨晶12GB+256GB
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">1179</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012426410740.html">
+                        <img
+                            src="https://imgservice.suning.cn/uimg1/b2c/image/_OuPuqvEOM0pUo-LmwrkZA.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            MU2Q3CH/A Apple iPhone 15 Pro Max 256G 原色钛金属 移动联通电信手机 2023新品
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">9999</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012426410738.html">
+                        <img
+                            src="https://imgservice.suning.cn/uimg1/b2c/image/4Bg1lTObkWuKjg2AsP0XRQ.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            MU2P3CH/A Apple iPhone 15 Pro Max 256G 白色钛金属 移动联通电信手机 2023新品
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">9999</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012316171927.html">
+                        <img
+                            src="https://imgservice.suning.cn/uimg1/b2c/image/g8-MlJ2GTDzesVuEu_v3-g.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            MK2N3CH/A Apple iPad 9代 10.2英寸 256GB WLAN版 平板电脑 深空灰色
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">2649</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0070640451/000000012411270862.html">
+                        <img
+                            src="https://imgservice.suning.cn/uimg1/b2c/image/bJtEtrt5GZEysnhxgpx6ng.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            华为MateBook X Pro 2023 i7-1360P 16+1T 深空灰
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">9688</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012419477157.html">
+                        <img
+                            src="https://imgservice.suning.cn/uimg1/b2c/image/oE3jTdk8DSWfQ2FylaMeYw.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            华为智能手表WATCH GT4（ARA-B19）凝霜白+白色真皮表带（41mm）
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">1688</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012431549120.html">
+                        <img
+                            src="https://imgservice.suning.cn/uimg1/b2c/image/NXyZOs07-_bydcKro4dFBg.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            小新Pro 16 AHP9GRXR732G1TB11C AI元启
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">6199</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="show3">
+            <h1>
+                <img src="https://image3.suning.cn/uimg/cms/img/171211358753386411.png?format=is" alt="">
+            </h1>
+            <ul>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012427500716.html">
+                        <img
+                            src="https://imgservice4.suning.cn/uimg1/b2c/atmosphere/UBYJGtovBlnErssQbUKILA.png?format=400h_400w_4e_80q.webp">
+                        <p>
+
+
+                            三星 Galaxy S24 12GB+256GB 浅珀黄
+
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">5099</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012427720089.html">
+                        <img
+                            src="https://imgservice4.suning.cn/uimg1/b2c/atmosphere/VgebCX4CVSKUqIT2XWNFJw.png?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            三星 Galaxy S24 Ultra 12GB+512GB 钛黑
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">9499</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012427720089.html">
+                        <img
+                            src="https://imgservice4.suning.cn/uimg1/b2c/atmosphere/VgebCX4CVSKUqIT2XWNFJw.png?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            三星 Galaxy S24 Ultra 12GB+512GB 钛黑
+
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">9499</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012395644883.html">
+                        <img
+                            src="https://imgservice4.suning.cn/uimg1/b2c/picture/t7ac8UwdOn-4D7MdrcL87w.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            可逸kivee苹果20W充电器套装
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">58</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012411234818.html">
+                        <img
+                            src="https://imgservice1.suning.cn/uimg1/b2c/image/7m6ryKCeoXiX0-Y4ArZJLA.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+                            苏宁小BIU手机充电器套包
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">99</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012426410738.html">
+                        <img
+                            src="https://imgservice.suning.cn/uimg1/b2c/image/4Bg1lTObkWuKjg2AsP0XRQ.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            MU2P3CH/A Apple iPhone 15 Pro Max 256G 白色钛金属 移动联通电信手机 2023新品
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">9999</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012426370060.html">
+                        <img
+                            src="https://imgservice.suning.cn/uimg1/b2c/image/foWHKN3j3P-QIdLwyh-xRQ.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            MTLG3CH/A Apple iPhone 15 128G 蓝色 移动联通电信5G手机 2023新品
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">5999</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/product/0000000000/000000012426360846.html">
+                        <img
+                            src="https://imgservice.suning.cn/uimg1/b2c/image/pT_Xm6sEPVFfk-I8XQHYfw.jpg?format=400h_400w_4e_80q.webp">
+                        <p>
+
+                            MTLJ3CH/A Apple iPhone 15 256G 黑色 移动联通电信5G手机 2023新品
+
+                        </p>
+                        <div class="mark">
+                            <span>自营</span>
+                        </div>
+                        <div class="price">
+                            <span class="symbol">￥</span>
+                            <span class="number">6999</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="show4">
+            <h1>
+                <img src="https://image2.suning.cn/uimg/cms/img/169355737015134504.png?format=is" alt="">
+            </h1>
+            <ul>
+                <li>
+                    <a href="https://shop.m.suning.com/30001556.html">
+                        <img src="https://image1.suning.cn/uimg/cms/img/169389187943714613.png?format=is" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://shop.m.suning.com/30000471.html">
+                        <img src="https://image1.suning.cn/uimg/cms/img/169389192308494736.png?format=is">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://m.suning.com/search/iPhone/">
+                        <img src="https://image1.suning.cn/uimg/cms/img/169389196480305627.png?format=is">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://shop.m.suning.com/30000033.html">
+                        <img src="https://image1.suning.cn/uimg/cms/img/169389199281773683.png?format=is">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://shop.m.suning.com/30002004.html">
+                        <img src="https://image1.suning.cn/uimg/cms/img/170485008658162836.png?format=is">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://shop.m.suning.com/30003951.html">
+                        <img src="https://image3.suning.cn/uimg/cms/img/170495151057117435.png?format=is">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="show5">
+            <h1>
+                <img src="https://image2.suning.cn/uimg/cms/img/169348257865151471.png?format=is" alt="">
+            </h1>
+            <a href="https://video.suning.com/wapLive.html?id=200179194158">
+                <div class="left">
+                    <img src="https://image.suning.cn/uimg/LV/zhibo/168714447629875715.jpg?format=is" alt="">
+                    <div class="watch"></div>
+                    <p>
+                        <span class="watchNumber">1314</span>
+                        <span>观看</span>
+                    </p>
+                </div>
+                <div class="right">
+                    <p>惠普小Q帅年终钜惠购机抽好礼</p>
+                    <div>
+                        <img src="https://image.suning.cn/uimg/cshop/logo/000000000030000707.jpg?1542340735170&format=is"
+                            alt="">
+                        <p>惠普苏宁自营旗舰店</p>
+                    </div>
+                    <ul>
+                        <li><img src="https://imgservice.suning.cn/uimg1/b2c/image/wvSm5j2dIAGXDu0zuUfmOQ.jpg?format=is"
+                                alt=""></li>
+                        <li><img src="https://imgservice.suning.cn/uimg1/b2c/image/apfpaFP9BxFKvJBeLhcJyQ.jpg?format=is"
+                                alt=""></li>
+                        <li>
+                            <p class="moreNumber">+59</p>
+                            <p class="text">商品</p>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+        <div class="show6">
+            <h1>
+                <img src="https://image1.suning.cn/uimg/cms/img/169348260154554473.png?format=is" alt="">
+            </h1>
+            <ol class="nav">
+                <li>精选</li>
+                <li>爆款手机</li>
+                <li>电脑整机</li>
+                <li>配件外设</li>
+                <li>办公设备</li>
+                <li>相机拍摄</li>
+                <li>智能数码</li>
+            </ol>
+            <div class="content">
+                <div class="box1 active">
+                    我是精选内容</div>
+                <div class="box2">
+                    我是爆款手机内容</div>
+                <div class="box3">
+                    我是电脑整机内容</div>
+                <div class="box4">
+                    我是配件外设内容</div>
+                <div class="box5">
+                    我是办公设备内容</div>
+                <div class="box6">
+                    我是相机拍摄内容</div>
+                <div class="box7">
+                    我是智能数码内容</div>
+            </div>
+            <div class="footer">
+                <img src="https://res.suning.cn/project/cmsWeb/suning/newwap/TYPD/images/atBottom.png" alt="">
+            </div>
+    </section>
+    <footer class="link">
+        <a href="https://c.m.suning.com/Wan3C.html">
+            <img src="https://image3.suning.cn/uimg/cms/img/159540868769978945.png?format=is" alt="">
+            <span>首页</span></a>
+        <a href="https://c.m.suning.com/wan3Cfenlei.html">
+            <img src="https://image1.suning.cn/uimg/cms/img/159540871140812231.png?format=is" alt="">
+            <span>分类</span></a>
+        <a href="https://yzsc.suning.com/yzsc_index.html">
+            <img src="https://image1.suning.cn/uimg/cms/img/172137492187154193.png?format=is" alt="">
+            <span>0元兑换</span></a>
+        <a href="https://shopping.suning.com/project/cart/telefee.html?adTypeCode=272406">
+            <img src="https://image1.suning.cn/uimg/cms/img/169510781256242822.png?format=is" alt="">
+            <span>充值缴费</span></a>
+        <a
+            href="https://cuxiao.m.suning.com/scms/221024.html?adTypeCode=1137&adId=https%3A%2F%2Flib.suning.com%2Fweex%2F221024.js%3FpageCode%3D221024%26isSCMS%3D1">
+            <img src="https://image2.suning.cn/uimg/cms/img/159540873515924255.png?format=is" alt="">
+            <span>主会场</span></a>
+    </footer>
+</body>
+<script>
+    //轮播图
+    var carousel = document.querySelector('.carousel');
+
+    var carouselUl = carousel.querySelector('ul');
+
+    var carouselLis = carouselUl.querySelectorAll('li');
+
+    var points = carousel.querySelector('ol');
+
+    // 屏幕的宽度
+
+    var screenWidth = document.documentElement.offsetWidth;
+
+    var timer = null;
+
+    // 设置 ul 的高度
+
+    carouselUl.style.height = carouselLis[0].offsetHeight + 'px';
+
+    // 动态生成小圆点
+
+    for (var i = 0; i < carouselLis.length; i++) {
+
+        var li = document.createElement('li');
+
+        if (i == 0) {
+
+            li.classList.add('active');
+
+        }
+
+        points.appendChild(li);
+
+    }
+
+    // 初始三个固定的位置
+
+    var left = carouselLis.length - 1;
+
+    var center = 0;
+
+    var right = 1;
+
+    // 归位(多次使用，封装成函数)
+
+    setTransform();
+
+    // 调用定时器
+
+    timer = setInterval(thisNext, 4000);
+
+    // 分别绑定touch事件
+
+    var startX = 0; // 手指落点
+
+    var startTime = null; // 开始触摸时间
+
+    carouselUl.addEventListener('touchstart', touchstartHandler); // 滑动开始绑定的函数 touchstartHandler
+
+    carouselUl.addEventListener('touchmove', touchmoveHandler); // 持续滑动绑定的函数 touchmoveHandler
+
+    carouselUl.addEventListener('touchend', touchendHandeler); // 滑动结束绑定的函数 touchendHandeler
+
+    // 轮播图片切换下一张
+
+    function thisNext() {
+
+        // 轮转下标
+
+        left = center;
+
+        center = right;
+
+        right++;
+
+        //　极值判断
+
+        if (right > carouselLis.length - 1) {
+
+            right = 0;
+
+        }
+
+        //添加过渡(多次使用，封装成函数)
+
+        setTransition(1, 1, 0);
+
+        // 归位
+
+        setTransform();
+
+        // 自动设置小圆点
+
+        setPoint();
+
+    }
+
+    // 轮播图片切换上一张
+
+    function thisPrev() {
+
+        // 轮转下标
+
+        right = center;
+
+        center = left;
+
+        left--;
+
+        //　极值判断
+
+        if (left < 0) {
+
+            left = carouselLis.length - 1;
+
+        }
+
+        //添加过渡
+
+        setTransition(0, 1, 1);
+
+        // 归位
+
+        setTransform();
+
+        // 自动设置小圆点
+
+        setPoint();
+
+    }
+
+    // 滑动开始
+
+    function touchstartHandler(e) {
+
+        // 清除定时器
+
+        clearInterval(timer);
+
+        // 记录滑动开始的时间
+
+        startTime = Date.now();
+
+        // 记录手指最开始的落点
+
+        startX = e.changedTouches[0].clientX;
+
+    }
+
+    // 滑动持续中
+
+    function touchmoveHandler(e) {
+
+        // 获取差值 自带正负
+
+        var dx = e.changedTouches[0].clientX - startX;
+
+        // 干掉过渡
+
+        setTransition(0, 0, 0);
+
+        // 归位
+
+        setTransform(dx);
+
+    }
+
+    //　滑动结束
+
+    function touchendHandeler(e) {
+
+        // 在手指松开的时候，要判断当前是否滑动成功
+
+        var dx = e.changedTouches[0].clientX - startX;
+
+        // 获取时间差
+
+        var dTime = Date.now() - startTime;
+
+        // 滑动成功的依据是滑动的距离(绝对值)超过屏幕的三分之一 或者滑动的时间小于300毫秒同时滑动的距离大于50
+
+        if (Math.abs(dx) > screenWidth / 3 || (dTime < 300 && Math.abs(dx) > 50)) {
+
+            // 滑动成功了
+
+            // 判断用户是往哪个方向滑
+
+            if (dx > 0) {
+
+                // 往右滑 看到上一张
+
+                thisPrev();
+
+            } else {
+
+                // 往左滑 看到下一张
+
+                thisNext();
+
+            }
+
+        } else {
+
+            // 添加上过渡
+
+            setTransition(1, 1, 1);
+
+            // 滑动失败了
+
+            setTransform();
+
+        }
+
+        // 重新启动定时器
+
+        clearInterval(timer);
+
+        // 调用定时器
+
+        timer = setInterval(thisNext, 4000);
+
+    }
+
+    // 设置过渡
+
+    function setTransition(a, b, c) {
+
+        if (a) {
+
+            carouselLis[left].style.transition = '1s linear';
+
+        } else {
+
+            carouselLis[left].style.transition = 'none';
+
+        }
+
+        if (b) {
+
+            carouselLis[center].style.transition = '1s linear';
+
+        } else {
+
+            carouselLis[center].style.transition = 'none';
+
+        }
+
+        if (c) {
+
+            carouselLis[right].style.transition = '1s linear';
+
+        } else {
+
+            carouselLis[right].style.transition = 'none';
+
+        }
+
+    }
+
+    //　封装归位
+
+    function setTransform(dx) {
+
+        dx = dx || 0;
+
+        carouselLis[left].style.transform = 'translateX(' + (-screenWidth + dx) + 'px)';
+
+        carouselLis[center].style.transform = 'translateX(' + dx + 'px)';
+
+        carouselLis[right].style.transform = 'translateX(' + (screenWidth + dx) + 'px)';
+
+    }
+
+    // 动态设置小圆点的active类
+
+    var pointsLis = points.querySelectorAll('li');
+
+    function setPoint() {
+
+        for (var i = 0; i < pointsLis.length; i++) {
+
+            pointsLis[i].classList.remove('active');
+
+        }
+
+        pointsLis[center].classList.add('active');
+
+    }
+
+
+
+
+
+
+
+
+
+
+    // 展示
+
+    function touch($this) {
+        var $ul = $this.children('ul');
+        var itemWidth = $ul.children().width();//每个列表项的宽度是固定的，我们将其存储在itemWidth变量中
+        var startX = 0;
+        var moveX = 0;
+        var currentIndex = 0; // 当前显示的列表项的索引
+        // 绑定触摸开始事件
+        $this.on('touchstart', function (e) {
+            startX = e.originalEvent.changedTouches[0].pageX;
+        });
+
+        // 绑定触摸移动事件
+        $this.on('touchmove', function (e) {
+            var endX = e.originalEvent.changedTouches[0].pageX;
+            moveX = endX - startX;
+            $ul.css('transform', 'translateX(' + (currentIndex * -itemWidth + moveX) + 'px)');
+        });
+
+        // 绑定触摸结束事件
+        $this.on('touchend', function (e) {
+            var endX = e.originalEvent.changedTouches[0].pageX;
+            moveX = endX - startX;
+
+            // 根据移动距离决定是否切换到下一个/上一个位置
+            if (Math.abs(moveX) > 50) {
+                if (moveX > 0) {
+                    // 向右滑动，切换到上一个位置
+                    currentIndex = Math.max(currentIndex - 1, 0);
+                } else {
+                    // 向左滑动，切换到下一个位置
+                    currentIndex = Math.min(currentIndex + 1, $ul.children().length - 1);
+                }
+            }
+
+            // 更新<ul>的transform属性以滑动到新的位置
+            $ul.css('transition', 'transform 0.3s ease-in-out'); // 添加过渡效果
+            $ul.css('transform', 'translateX(' + (currentIndex * -itemWidth) + 'px)');
+
+            // 清除过渡效果
+            setTimeout(function () {
+                $ul.css('transition', '');
+            }, 300);
+        });
+    }
+    touch($('.show1'));
+    touch($('.show2'));
+    touch($('.show3'));
+    touch($('.show4'));
+
+
+    //猜你喜欢
+    $('.show6 ol li').click(function () {
+        var currentIndex = $(this).index(); // 获取当前点击的li的索引
+        $('.show6 .content').children().eq(currentIndex).show().siblings().hide(); // 隐藏其他的content
+    });
+
+    //固定定位
+
+    $(window).scroll(function () {
+        var top2 = $('.search').offset().top;
+        var top1 = $('.show6 .content').offset().top;
+
+        if ($(window).scrollTop() > top2) {
+            $('nav').addClass('fixed');
+            $('.middle').html(`
+            <a class="search-btn" href="https://m.suning.com/search.html?ch=99999988">
+                <img src="https://res.suning.cn/project/cmsWeb/suning/newwap/TYPD/images/search.png">
+                <span class="search-word">iPhone 15</span>
+            </a>
+        `);
+        } else {
+            $('nav').removeClass('fixed');
+            $('.middle').html(`
+            <div class="slogan"></div>
+            <div class="attention">
+                <a href="">
+                    <img src="https://res.suning.cn/project/cmsWeb/suning/newwap/TYPD/images/followW.png">
+                </a>
+            </div>
+        `);
+        }
+
+        if ($(window).scrollTop() > top1) {
+            $('.show6 .nav, .show6 .nav li').addClass('fixed');
+        } else {
+            $('.show6 .nav, .show6 .nav li').removeClass('fixed');
+        }
+    });
+
+</script>
+
+</html>
