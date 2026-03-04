@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./normalize.css">
+    <title>我的滑播图-Made by CappuccinoRose</title>
+    <style>
+        /* 清除标签默认边距 */
+
+        body,
+        ul,
+        li,
+        ol,
+        img {
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+        /* 清除 ul 等标签前面的“小圆点” */
+
+        ul,
+        li,
+        ol {
+
+            list-style-type: none;
+
+        }
+
+        body {
+            width: 375px;
+            margin: 0 auto;
+            min-width: 320px;
+            max-width: 540px;
+            background-color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #666;
+        }
+
+
+        /* 轮播图最外层盒子 */
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            width: 375px;
+            max-width: 540px;
+            min-width: 320px;
+
+        }
+
+        .carousel ul li {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 375px;
+            height:500px;
+            /* 使用 transform:translaX(300%) 暂时将 li 移动到屏幕外面去*/
+            -webkit-transform: translateX(300%);
+            transform: translateX(300%);
+
+        }
+
+        .carousel ul li a img {
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* ie8 */
+
+            display: block;
+
+            -ms-interpolation-mode: bicubic;
+            /*为了照顾ie图片缩放失真*/
+
+        }
+
+        /* 小圆点盒子 */
+
+        .carousel .points {
+
+            /* 未知宽度的盒子，使用 absolute 定位，结合 transform 的方式进行居中 */
+
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+        }
+
+        /* 小圆点 */
+
+        .carousel .points li {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            float: left;
+            margin: 0 2px;
+            background-color: #fff;
+        }
+
+        /* 选中小圆点的样式类 */
+
+        .carousel .points li.active {
+            background-color: #666568;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+    <section class="carousel">
+        <ul>
+            <li><a href="#"><img src="https://vcg01.cfp.cn/creative/vcg/800/new/VCG211314575750.jpg" alt=""></a></li>
+            <li><a href="#"><img src="https://vcg02.cfp.cn/creative/vcg/800/new/VCG211432669953.jpg" alt=""></a></li>
+            <li><a href="#"><img src="https://vcg01.cfp.cn/creative/vcg/800/new/VCG211482682184.jpg"></a></li>
+            <li><a href="#"><img src="https://vcg01.cfp.cn/creative/vcg/800/new/VCG211446891838.jpg"></a></li>
+            <li><a href="#"><img src="https://vcg02.cfp.cn/creative/vcg/800/new/VCG211291633488.jpg"></a></li>
+            <li><a href="#"><img src="https://vcg04.cfp.cn/creative/vcg/800/new/VCG41N1476448168.jpg"></a></li>
+            <li><a href="#"><img src="https://vcg04.cfp.cn/creative/vcg/800/new/VCG211323348047.jpg"></a></li>
+            <li><a href="#"><img src="https://vcg03.cfp.cn/creative/vcg/800/new/VCG211323348222.jpg"></a></li>
+
+        </ul>
+        <ol class="points">
+        </ol>
+    </section>
+</body>
+<script>
+$(document).ready(function() {
+    var $carousel =$('.carousel');
+    var $carouselUl =$carousel.children('ul');
+    var $carouselLis =$carouselUl.children('li');
+    var $points =$carousel.children('ol');
+
+    var screenWidth = $(document).width();
+    var timer = null;
+
+    // 设置 ul 的高度
+    $carouselUl.height($carouselLis.eq(0).height());
+
+    // 动态生成小圆点
+    for (var i = 0; i < $carouselLis.length; i++) {
+        var $li =$('<li>').addClass(i === 0 ? 'active' : '');
+        $points.append($li);
+    }
+
+    var left = $carouselLis.length - 1;
+    var center = 0;
+    var right = 1;
+
+    // 归位
+    setTransform();
+
+    // 调用定时器
+    timer = setInterval(showNext, 2000);
+
+    // 分别绑定touch事件
+    var startX = 0; // 手指落点
+    var startTime = null; // 开始触摸时间
+    $carouselUl.on('touchstart', touchstartHandler); // 滑动开始绑定的函数 touchstartHandler
+    $carouselUl.on('touchmove', touchmoveHandler); // 持续滑动绑定的函数 touchmoveHandler
+    $carouselUl.on('touchend', touchendHandeler); // 滑动结束绑定的函数 touchendHandeler
+
+    // 轮播图片切换下一张
+    function showNext() {
+        left = center;
+        center = right;
+        right++;
+
+        if (right > $carouselLis.length - 1) {
+            right = 0;
+        }
+
+        setTransition(1, 1, 0);
+        setTransform();
+        setPoint();
+    }
+
+    // 轮播图片切换上一张
+    function showPrev() {
+        right = center;
+        center = left;
+        left--;
+
+        if (left < 0) {
+            left = $carouselLis.length - 1;
+        }
+
+        setTransition(0, 1, 1);
+        setTransform();
+        setPoint();
+    }
+
+    // 滑动开始
+    function touchstartHandler(e) {
+        clearInterval(timer);
+        startTime = Date.now();
+        startX = e.originalEvent.changedTouches[0].clientX;
+    }
+
+    // 滑动持续中
+    function touchmoveHandler(e) {
+        var dx = e.originalEvent.changedTouches[0].clientX - startX;
+        setTransition(0, 0, 0);
+        setTransform(dx);
+    }
+
+    // 滑动结束
+    function touchendHandeler(e) {
+        var dx = e.originalEvent.changedTouches[0].clientX - startX;
+        var dTime = Date.now() - startTime;
+
+        if (Math.abs(dx) > screenWidth / 3 || (dTime < 300 && Math.abs(dx) > 50)) {
+            if (dx > 0) {
+                showPrev();
+            } else {
+                showNext();
+            }
+        } else {
+            setTransition(1, 1, 1);
+            setTransform();
+        }
+
+        clearInterval(timer);
+        timer = setInterval(showNext, 2000);
+    }
+
+    // 设置过渡
+    function setTransition(a, b, c) {
+        $carouselLis.eq(left).css('transition', a ? '1s linear' : 'none');
+        $carouselLis.eq(center).css('transition', b ? '1s linear' : 'none');
+        $carouselLis.eq(right).css('transition', c ? '1s linear' : 'none');
+    }
+
+    // 封装归位
+    function setTransform(dx) {
+        dx = dx || 0;
+        $carouselLis.eq(left).css('transform', 'translateX(' + (-screenWidth + dx) + 'px)');
+        $carouselLis.eq(center).css('transform', 'translateX(' + dx + 'px)');
+        $carouselLis.eq(right).css('transform', 'translateX(' + (screenWidth + dx) + 'px)');
+    }
+
+    // 动态设置小圆点的active类
+    function setPoint() {
+        $points.find('li').removeClass('active').siblings('li').eq(center).addClass('active');
+    }
+});
+</script>
+</html>
