@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0,min-imum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>模拟京东购物框架-Made by </title>
+    <link rel="stylesheet" href="./normalize.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 375px;
+            margin: 0 auto;
+            min-width: 320px;
+            max-width: 540px;
+            background-color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #666;
+            padding:40px 0 100px;
+        }
+
+        button {
+            border: none;
+        }
+
+        input {
+            border: none;
+            outline: none;
+        }
+
+        ul {
+            width: 100%;
+            margin: 0 auto;
+            min-width: 320px;
+            max-width: 540px;
+            overflow: hidden;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        span {
+            display: block;
+            width: 100%;
+            height: 30%;
+        }
+
+        /* -------------------------------------------------------------------广告 ------------------------------------------------------------------*/
+        ul.advertisement {
+            background-color: rgba(0, 0, 0, .7);
+            height: 50px;
+           
+        }
+
+        ul.advertisement li {
+            height: 100%;
+            line-height: 50px;
+            color: white;
+        }
+
+        ul.advertisement li:first-child {
+            width: 8%;
+        }
+
+        ul.advertisement li:first-child a {
+            background: url('https://m.360buyimg.com/mobilecms/jfs/t19480/10/1439571805/820/787bec2c/5ac9d730N04e6d766.png') no-repeat center;
+            background-size: 40% auto;
+        }
+
+        ul.advertisement li:nth-child(3) {
+            width: 15%;
+        }
+
+        ul.advertisement li:nth-child(2) {
+            width: 10%;
+            background: url('https://img13.360buyimg.com/img/jfs/t1/185008/26/33606/2587/641973cbFd5acd3e9/ad0294917f47e6b8.png') no-repeat center;
+            background-size: 90% auto;
+        }
+
+        ul.advertisement li:nth-child(3) {
+            width: 55%;
+
+        }
+
+        ul.advertisement li:nth-child(4) {
+            width: 27%;
+
+        }
+
+        ul.advertisement li:nth-child(4) button {
+            width: 80%;
+            height: 80%;
+            color: white;
+            background-color: rgb(250, 7, 7);
+            border-radius: 10%;
+        }
+
+        /* -------------------------------------------------------------------导航 ------------------------------------------------------------------*/
+        ul.nav {
+            position: fixed;
+            top:0;
+            left:50%;
+            transform: translateX(-50%);
+            width: 375px;
+            height: 40px;
+            min-width: 320px;
+            max-width: 540px;
+            overflow: hidden;
+            z-index: 999;
+            background-color: rgba(255, 8, 8, 0.7);
+        }
+
+        ul.nav li:first-child {
+            width: 40px;
+            height: 100%;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUBAMAAAB/pwA+AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURf///////////0dwTP///////////////////////////////////////5p/RLkAAAANdFJOU4Ag3wAQmshQ72CvcDhs89WxAAAAdklEQVQI12MwdjSGAgbLXkUY01f1liEDCExmkA1us74LAlcYjC5dMBYEAWEGwyBmmFpjOGAwLhCGMU3vXocbtqbNXAkEUhhkl7eZJ0GYSAqMJxzGYpjhMrgVRjegFjsDnaNkCXbORQYP1asQR25msLwLdzrCQwDfSjfpYyzAPQAAAABJRU5ErkJggg==') no-repeat center;
+        }
+
+        ul.nav li:nth-child(2) {
+            position: relative;
+            width: auto;
+            height: 100%;
+        }
+
+        ul.nav li:nth-child(2) input {
+            width: 100%;
+            height: 50%;
+            margin: 0.6em 0.2em;
+            padding-left: 5em;
+            border-radius: 10px;
+            background-color: white;
+            box-sizing: border-box;
+        }
+
+        ul.nav li:nth-child(2) h3.logo {
+            position: absolute;
+            top: 23%;
+            left: 5%;
+            width: 32px;
+            height: 21px;
+            background: url('https://minicaty-pro.pf.jd.com/favicon.ico') no-repeat center;
+            background-size: 28px 21px;
+        }
+
+        ul.nav li:nth-child(2) .logo::before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            left: 112%;
+            width: 1px;
+            height: 19px;
+            background-color: #666;
+        }
+
+        ul.nav li:nth-child(2) .logo a {
+            font-size: 0;
+        }
+
+        ul.nav li:nth-child(2) button.search {
+            position: absolute;
+            top: 22%;
+            left: 20%;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAwUExURUdwTP8vEvsrGPkrGfkrF/osGfosGPkrGfkvF/osGPosGPsrF/orGPssGPkvGvosGW/l7QIAAAAPdFJOUwAQn+9g379wIJCwQ4DPME152SwAAABySURBVAjXY2BgLLO32sAABE+NXMo+CTAw8JkBia0XGRhYFwBFOSwZGPwbQPL+AgxJIJqBuYDBHMzgUmD4AmOEgxlsExiWgRn9Gxj2g01VBQpGAGl2oErGqw4MjPMPAHmSn5Pum7OCWC1KUwR4/jBAwVEAwNgZS5Zo3jIAAAAASUVORK5CYII=') no-repeat center center;
+            background-size: 80% auto;
+
+        }
+
+        ul.nav li:nth-child(3) {
+            float: right;
+            width: 60px;
+            height:100%;
+            line-height: 40px;
+            font-size: 18px;
+            color: white;
+        }
+
+        /* -------------------------------------------------------------------轮播 ------------------------------------------------------------------*/
+        /* 轮播图最外层盒子 */
+
+        .carousel {
+            width: 375px;
+            margin: 0 auto;
+            min-width: 320px;
+            max-width: 540px;
+            position: relative;
+            overflow: hidden;
+
+        }
+
+        .carousel ul li {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 375px;
+            height:300px;
+            /* 使用 transform:translaX(300%) 暂时将 li 移动到屏幕外面去*/
+            -webkit-transform: translateX(300%);
+            transform: translateX(300%);
+
+        }
+
+        .carousel ul li img {
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* ie8 */
+
+            display: block;
+
+            -ms-interpolation-mode: bicubic;
+            /*为了照顾ie图片缩放失真*/
+        }
+
+        /* 小圆点盒子 */
+
+        .carousel .points {
+
+            /* 未知宽度的盒子，使用 absolute 定位，结合 transform 的方式进行居中 */
+
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+        }
+
+        /* 小圆点 */
+
+        .carousel .points li {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            float: left;
+            margin: 0 2px;
+            background-color: #fff;
+        }
+
+        /* 选中小圆点的样式类 */
+
+        .carousel .points li.active {
+            background-color: #666568;
+        }
+
+        /* -----------------------------------------------------------------分类广告 -----------------------------------------------------------------------*/
+        ul.categoriesAd li {
+            width: 33.33%;
+            height: 120px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        ul.categoriesAd li:first-child a {
+            background: url('https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/229511/13/17823/102718/665c8e73Fc0b73d2b/a0ff85452c5393a2.jpg!q80.dpg') no-repeat;
+            background-size: 100%;
+        }
+
+        ul.categoriesAd li:nth-child(2) a {
+            background: url('https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/235268/13/10457/56813/65a38a5dF1179cc4f/cabdf883828934b4.jpg!q80.dpg') no-repeat;
+            background-size: 100%;
+        }
+
+        ul.categoriesAd li:nth-child(3) a {
+            background: url('https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/40425/26/20014/92246/6512727cFf3368023/5cc692f60fd68178.jpg!q80.dpg') no-repeat;
+            background-size: 100%;
+        }
+
+        /* -------------------------------------------------------------------图标 ------------------------------------------------------------------*/
+        ul.icon{
+        margin:10px auto;
+        }
+        ul.icon li {
+            width: 20%;
+            height: 80px;
+        }
+
+        ul.icon li a {
+            color: #666;
+        }
+
+        ul.icon li img {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* --------------------------------------------------------------推荐 ----------------------------------------------------------------*/
+        ul.recommendation {
+            width: 100%;
+            height: 185px;
+        }
+        ul.recommendation li {
+            width: 50%;
+            height: 100%;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        ul.recommendation li:nth-child(1) a {
+            background: url('https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/59110/1/24513/31789/66a1ef3fFd97f4d71/f40699d1ac45d34c.jpg!q80.dpg') no-repeat;
+            background-size: 100% auto;
+        }
+
+        ul.recommendation li:nth-child(2) a {
+            background: url('https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/207724/24/40169/162856/6620ed5cF751f7281/6ac9aa7aa331ee0e.jpg!q80.dpg') no-repeat;
+            background-size: auto 100%;
+        }
+
+        /* --------------------------------------------------------------展示---------------------------------------------------------- */
+        ul.showcase {
+            height: 500px;
+        }
+
+        ul.showcase li:first-child {
+            width: 100%;
+            height: 10%;
+            line-height: 60px !important;
+            color: #f05aa5;
+            font: italic bold 30px "华文行楷";
+        }
+
+        ul.showcase li.big {
+            width: 50%;
+            height: 30%;
+        }
+
+        ul.showcase li.big img {
+            width: 45%;
+            height: 50%;
+        }
+
+        ul.showcase li h3 {
+            margin: 0 auto;
+            height: 25%;
+        }
+
+        ul.showcase li span {
+            margin: 0 auto;
+            height: 20%;
+            font-size: 12px;
+            color: #959494;
+        }
+
+        ul.showcase li.small {
+            width: 25%;
+            height: 30%;
+        }
+
+        ul.showcase li.small img {
+            width: 70%;
+            height: 40%;
+            margin-top: 15%;
+        }
+
+        /* ----------------------------------------------------------------未完待续 */
+       
+
+        /* -------------------------------------------------------------------尾部 ------------------------------------------------------------------*/
+        ul.footer {
+            position: fixed;
+            bottom: 0;
+            left:50%;
+            transform: translateX(-50%);
+            width: 375px;
+            min-width: 320px;
+            max-width: 540px;
+            height: 70px;
+            background-color: white;
+            box-shadow: 0 0 5px #959494;
+            border-radius: 10px;;
+        }
+
+        ul.footer li {
+            float: left;
+            width: 25%;
+            height: 100%;
+        }
+
+        ul.footer li a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        ul.footer li a img {
+            width: 100%;
+        }
+    </style>
+
+<body>
+    <ul class="advertisement">
+        <li><a href="https://minicaty-pro.pf.jd.com/index.html?swbr=1&fromori=redirect"></a></li>
+        <li></li>
+        <li>打开京东APP,购物更轻松</li>
+        <li><button>立即打开</button></li>
+    </ul>
+    <ul class="nav">
+        <li><button class="menu"></button></li>
+        <li><input type="search" placeholder="搜索">
+            <h3 class="logo">
+                <a href="javaScript:;">京东</a>
+            </h3>
+
+            <button class="search"></button>
+        </li>
+        <li>登录</li>
+    </ul>
+    <section class="carousel">
+        <ul>
+            <li><a href="#"><img src="https://m.360buyimg.com/babel/jfs/t1/245026/7/11635/512379/667522e7F4eda431f/28e6fc5c8dabc13a.jpg.webp"></a></li>
+            <li><a href="#"><img src="https://m.360buyimg.com/babel/jfs/t1/224483/27/16991/41575/663056a0F1becf767/95515699c97560ab.jpg"></a></li>
+            <li><a href="#"><img src="https://m.360buyimg.com/babel/jfs/t20270723/50007/3/25101/61356/669f660fFdd58df0b/4f8628f92d1066d7.jpg"></a></li>
+            <li><a href="#"><img src="https://imgcps.jd.com/img-cubic/creative_server_cia_jdcloud/v2/2000367/100075235967/FocusFullshop/CkNqZnMvdDEvMjM3MTI1LzMwLzE5MjgxLzM1NDk4LzY2N2U0Yzg5RjEyYTFlNDlkL2FiNjY4OThjZDE0NGNiNDQucG5nEgkzLXR5XzBfNTQwAjjvi3pCEAoM6a2F5peP5omL5py6EAFCEAoM6ZyH5pK85p2l5Li0EAJCEAoM56uL5Y2z5oqi6LStEAZCCgoG5LyY6LSoEAdY_9TL5_QC/cr/s/q.jpg"></a></li>
+            <li><a href="#"><img src="https://imgcps.jd.com/ling-cubic/ling4/lab/amZzL3QxLzExNjA0MS8yMS8zMjg0OS8zODE5MjAvNjNkYzczY2JGZjY4NDVjYTAvYTkwOWYyNDdmOWIzYjQ1ZS5wbmc/5Lqs6YCJ5aW96LSn/5L2g5YC85b6X5oul5pyJ/1635186804533968897/cr/s/q.jpg"></a></li>
+            <li><a href="#"><img src="https://m.360buyimg.com/babel/jfs/t20270709/4561/20/20812/99546/668cd5caF0b10b89d/ff7ffa2e7b252809.jpg"></a></li>
+
+        </ul>
+        <ol class="points">
+        </ol>
+    </section>
+    <ul class="categoriesAd">
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+    </ul>
+    <ul class="icon">
+        <li><a href="https://pro.m.jd.com/mall/active/3xhqjGH1wMz5FaMgrfYhR22sFvqz/index.html?babelChannel=ttt192">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/187540/12/30456/5256/639c2315Ebc95c142/350a8f0c766f5460.png"><span>京东超市</span></a>
+        </li>
+        <li><a href="https://pro.m.jd.com/mall/active/8tHNdJLcqwqhkLNA8hqwNRaNu5f/index.html?babelChannel=ttt213">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/149144/13/37547/3299/64b11027F86659ec1/fade439ac90544b7.png"><span>京东电器</span></a>
+        </li>
+        <li><a href="https://pro.m.jd.com/mall/active/jgwurvXVswT7VFuX4S5DG2aaK1T/index.html">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/195186/28/35854/3469/64d4a1e5Fe388886e/3c6f65ecd0aba98b.png"><span>服饰美妆</span></a>
+        </li>
+        <li><a
+                href="https://plogin.m.jd.com/login/login?appid=773&returnurl=https%3A%2F%2Ftxsm-m.jd.com%2F%3FbabelChannel%3Dttt35">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/208529/13/35972/4081/6497ee53F4f8d38d9/c5267cb385f923fe.png"><span>充值中心</span></a>
+        </li>
+        <li><a
+                href="https://plogin.m.jd.com/login/login?appid=773&returnurl=https%3A%2F%2Ftxsm-m.jd.com%2F%3FbabelChannel%3Dttt35">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/37709/6/15279/6118/60ec1046E4b5592c6/a7d6b66354efb141.png"><span>PLUS会员</span></a>
+        </li>
+        <li>
+            <a href="https://pro.m.jd.com/mall/active/4P9a2T9osR9JvtzHVaYTPvsecRtg/index.html">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/177902/16/13776/5658/60ec0e71E801087f2/a0d5a68bf1461e6d.png"><span>京东生鲜</span></a>
+        </li>
+        <li>
+            <a
+                href="https://cfe.m.jd.com/privatedomain/risk_handler/03101900/?returnurl=https%3A%2F%2Fgmart.jd.com%2F%3FchannelId%3D331%26appId%3D11%26beginTime%3D1605941298000%26des%3Ddolphin%26dolphinId%3D11&rqhost=api.m.jd.com&rpid=rp-188591558-10081-1722148130508&evtype=3&evapi=color_mzhprice_getCustomRealPriceInfoForColor&source=1&forceCurrentView=1&lgid=2193">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/191060/24/12861/6818/60ec11f2E67cf5ee6/c264378678b3cd96.png"><span>京东国际</span></a>
+        </li>
+        <li>
+            <a href="https://zpsy.jd.com/">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/186882/8/12149/5894/60ec1250E9335241a/b22054613aa8ae75.png"><span>京东拍卖</span></a>
+        </li>
+        <li>
+            <a href="https://pro.m.jd.com/mall/active/LHGZv1DrGkva1jNpUkKFuNFN6oo/index.html">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/36551/10/16098/5792/60ec1589E755822d7/f958b896e706008a.png"><span>拍拍二手</span></a>
+        </li>
+        <li>
+            <a href="https://m-appcenter-pro.pf.jd.com/">
+                <img
+                    src="https://m15.360buyimg.com/mobilecms/jfs/t1/192665/22/12752/7912/60ec15cbE261a32bf/3ace51badf80e71b.png"><span>查看全部</span></a>
+        </li>
+    </ul>
+    <ul class="recommendation">
+        <li><a href="https://item.m.jd.com/ware/view.action?wareId=100078738965"></a></li>
+        <li><a href="https://item.m.jd.com/ware/view.action?wareId=100096589653"></a></li>
+    </ul>
+    <ul class="showcase">
+        <li>爱生活</li>
+        <li class="big">
+            <h3>Docile NutriSource</h3>
+            <span>甄选真鲜肉猫粮</span>
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/225296/22/23776/119168/66a4bd2eFc1d3e4b3/0df8d228a21caf97.jpg!q80.dpg">
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/242193/14/11956/118534/6673fee0F6e9caf2c/3bbfd4fd256a829a.jpg!q80.dpg">
+        </li>
+        <li class="big">
+            <h3>HUWIMAPadPro HUAWEI</h3>
+            <span></span>
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/249575/33/9825/406582/6655c2e0F85305781/5a6d49302c66f9ad.png!q80.dpg">
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/228080/9/21413/92745/6671ab72F757fa1d0/20f3beb8fb18f7ef.jpg!q80.dpg">
+        </li>
+        <li class="big">
+            <h3>小冲山 天湖啤酒</h3>
+            <span>低度微醺酒 9度小麦原浆精酿白啤</span>
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/247914/2/12267/70016/6673f64eFeb430f86/4c3c0b133de28455.jpg!q80.dpg">
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/187379/19/45383/184732/664afec3F2b13a7d9/17568cf35cf8dcbe.jpg!q80.dpg">
+        </li>
+        <li class="big">
+            <h3>巴迪高 清风</h3>
+            <span>一次性压缩毛巾 加厚平纹0添加</span>
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/176548/28/45329/133261/668ba0c0F9224c8e8/568d3d0c0d31ef07.jpg!q80.dpg">
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/36557/21/22370/106291/669e2995F604c5be0/eac7c7539ff699ad.jpg!q80.dpg">
+        </li>
+        <li class="small">
+            <h3>德华磨巧</h3>
+            <span>巧克力口味冰淇淋 生鲜冷冻</span>
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/119520/30/41202/71172/65bc9006Faa685eb1/d2dca2b97ff31e5c.jpg!q80.dpg">
+        </li>
+        <li class="small">
+            <h3>奥川</h3>
+            <span>AI人脸跟踪手机稳定器360度旋转</span>
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/228992/32/20549/54959/6673c3cbF117581b0/00e3d26ad7bd29e1.jpg!q80.dpg">
+        </li>
+        <li class="small">
+            <h3>成人洗眼液</h3>
+            <span>叶黄素滴眼液眼疲劳眼干眼涩视力</span>
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/4198/16/21695/120328/669779edFcf05f698/31b4d0e7ee9329b8.jpg!q80.dpg">
+        </li>
+        <li class="small">
+            <h3>伊利</h3>
+            <span>甄稀多口味冰淇淋90克/杯*4杯</span>
+            <img
+                src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/20095/14/21769/189853/66a36652F1a588360/4db70decf7d41ff8.jpg!q80.dpg">
+        </li>
+    </ul>
+    <ul class="footer">
+        <!--用伪元素添加图标 -->
+        <li><a href="#">
+                <img
+                    src="https://img11.360buyimg.com/jdphoto/s130x100_jfs/t1/67550/26/12426/5094/5d9c4b13Eea435a3f/81328b0609c60a3c.png"></a>
+        </li>
+        <li><a href="https://minicaty-pro.pf.jd.com/index.html?swbr=1&searchFrom=home">
+                <img
+                    src="https://img11.360buyimg.com/jdphoto/s130x100_jfs/t1/56507/6/12787/3168/5d9c4b12Ef363dd8d/4af32f42575509d8.png"></a>
+        </li>
+        <li><a href="https://p.m.jd.com/cart/cart.action?fromnav=1">
+                <img
+                    src="https://img11.360buyimg.com/jdphoto/s130x100_jfs/t1/64954/4/12406/3529/5d9c4b12Ee7a82735/f2fe0a88bf344736.png"></a>
+        </li>
+        <li><a
+                href="https://plogin.m.jd.com/login/login?appid=300&returnurl=https%3A%2F%2Fwq.jd.com%2Fpassport%2FLoginRedirect%3Fstate%3D3592192540%26returnurl%3Dhttps%253A%252F%252Fmy.m.jd.com%252F%253Fsceneval%253D2%2526jxsid%253D17220822685606047381%2526appCode%253Dms0ca95114&source=wq_passport">
+                <img
+                    src="https://img12.360buyimg.com/img/s130x100_jfs/t1/203343/14/10880/3097/61641568E184a8e0b/4522f6ec5bb9b10b.png"></a>
+        </li>
+    </ul>
+</body>
+<script>
+    var carousel = document.querySelector('.carousel');
+
+    var carouselUl = carousel.querySelector('ul');
+
+    var carouselLis = carouselUl.querySelectorAll('li');
+
+    var points = carousel.querySelector('ol');
+
+    // 屏幕的宽度
+
+    var screenWidth = document.documentElement.offsetWidth;
+
+    var timer = null;
+
+    // 设置 ul 的高度
+
+    carouselUl.style.height = carouselLis[0].offsetHeight + 'px';
+
+    // 动态生成小圆点
+
+    for (var i = 0; i < carouselLis.length; i++) {
+
+        var li = document.createElement('li');
+
+        if (i == 0) {
+
+            li.classList.add('active');
+
+        }
+
+        points.appendChild(li);
+
+    }
+
+    // 初始三个固定的位置
+
+    var left = carouselLis.length - 1;
+
+    var center = 0;
+
+    var right = 1;
+
+    // 归位(多次使用，封装成函数)
+
+    setTransform();
+
+    // 调用定时器
+
+    timer = setInterval(showNext, 4000);
+
+    // 分别绑定touch事件
+
+    var startX = 0; // 手指落点
+
+    var startTime = null; // 开始触摸时间
+
+    carouselUl.addEventListener('touchstart', touchstartHandler); // 滑动开始绑定的函数 touchstartHandler
+
+    carouselUl.addEventListener('touchmove', touchmoveHandler); // 持续滑动绑定的函数 touchmoveHandler
+
+    carouselUl.addEventListener('touchend', touchendHandeler); // 滑动结束绑定的函数 touchendHandeler
+
+    // 轮播图片切换下一张
+
+    function showNext() {
+
+        // 轮转下标
+
+        left = center;
+
+        center = right;
+
+        right++;
+
+        //　极值判断
+
+        if (right > carouselLis.length - 1) {
+
+            right = 0;
+
+        }
+
+        //添加过渡(多次使用，封装成函数)
+
+        setTransition(1, 1, 0);
+
+        // 归位
+
+        setTransform();
+
+        // 自动设置小圆点
+
+        setPoint();
+
+    }
+
+    // 轮播图片切换上一张
+
+    function showPrev() {
+
+        // 轮转下标
+
+        right = center;
+
+        center = left;
+
+        left--;
+
+        //　极值判断
+
+        if (left < 0) {
+
+            left = carouselLis.length - 1;
+
+        }
+
+        //添加过渡
+
+        setTransition(0, 1, 1);
+
+        // 归位
+
+        setTransform();
+
+        // 自动设置小圆点
+
+        setPoint();
+
+    }
+
+    // 滑动开始
+
+    function touchstartHandler(e) {
+
+        // 清除定时器
+
+        clearInterval(timer);
+
+        // 记录滑动开始的时间
+
+        startTime = Date.now();
+
+        // 记录手指最开始的落点
+
+        startX = e.changedTouches[0].clientX;
+
+    }
+
+    // 滑动持续中
+
+    function touchmoveHandler(e) {
+
+        // 获取差值 自带正负
+
+        var dx = e.changedTouches[0].clientX - startX;
+
+        // 干掉过渡
+
+        setTransition(0, 0, 0);
+
+        // 归位
+
+        setTransform(dx);
+
+    }
+
+    //　滑动结束
+
+    function touchendHandeler(e) {
+
+        // 在手指松开的时候，要判断当前是否滑动成功
+
+        var dx = e.changedTouches[0].clientX - startX;
+
+        // 获取时间差
+
+        var dTime = Date.now() - startTime;
+
+        // 滑动成功的依据是滑动的距离(绝对值)超过屏幕的三分之一 或者滑动的时间小于300毫秒同时滑动的距离大于50
+
+        if (Math.abs(dx) > screenWidth / 3 || (dTime < 300 && Math.abs(dx) > 50)) {
+
+            // 滑动成功了
+
+            // 判断用户是往哪个方向滑
+
+            if (dx > 0) {
+
+                // 往右滑 看到上一张
+
+                showPrev();
+
+            } else {
+
+                // 往左滑 看到下一张
+
+                showNext();
+
+            }
+
+        } else {
+
+            // 添加上过渡
+
+            setTransition(1, 1, 1);
+
+            // 滑动失败了
+
+            setTransform();
+
+        }
+
+        // 重新启动定时器
+
+        clearInterval(timer);
+
+        // 调用定时器
+
+        timer = setInterval(showNext, 4000);
+
+    }
+
+    // 设置过渡
+
+    function setTransition(a, b, c) {
+
+        if (a) {
+
+            carouselLis[left].style.transition = '1s linear';
+
+        } else {
+
+            carouselLis[left].style.transition = 'none';
+
+        }
+
+        if (b) {
+
+            carouselLis[center].style.transition = '1s linear';
+
+        } else {
+
+            carouselLis[center].style.transition = 'none';
+
+        }
+
+        if (c) {
+
+            carouselLis[right].style.transition = '1s linear';
+
+        } else {
+
+            carouselLis[right].style.transition = 'none';
+
+        }
+
+    }
+
+    //　封装归位
+
+    function setTransform(dx) {
+
+        dx = dx || 0;
+
+        carouselLis[left].style.transform = 'translateX(' + (-screenWidth + dx) + 'px)';
+
+        carouselLis[center].style.transform = 'translateX(' + dx + 'px)';
+
+        carouselLis[right].style.transform = 'translateX(' + (screenWidth + dx) + 'px)';
+
+    }
+
+    // 动态设置小圆点的active类
+
+    var pointsLis = points.querySelectorAll('li');
+
+    function setPoint() {
+
+        for (var i = 0; i < pointsLis.length; i++) {
+
+            pointsLis[i].classList.remove('active');
+
+        }
+
+        pointsLis[center].classList.add('active');
+
+    }
+</script>
+
+</html>
