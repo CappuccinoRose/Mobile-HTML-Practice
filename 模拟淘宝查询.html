@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>模拟淘宝查询 - Made By CappuccinoRose</title>
+    <link rel="stylesheet" href="./normalize.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            min-width: 320px;
+            max-width: 540px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #ffd6d5 0%, #fff1ec 35%, #e6f7f0 70%, #e2f3f8 100%);
+        }
+
+        /* 顶部搜索栏 */
+        .search-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+            padding: 12px 16px 16px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5f5f5;
+            border-radius: 999px;
+            padding: 6px 10px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
+        }
+
+        .search-bar input[type="text"] {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 15px;
+            line-height: 22px;
+            padding: 4px 0;
+            color: #333;
+        }
+
+        .search-bar input[type="text"]::placeholder {
+            color: #bbb;
+        }
+
+        .search-bar button {
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: #fff;
+            padding: 6px 14px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform .1s, box-shadow .2s, opacity .2s;
+            box-shadow: 0 1px 4px rgba(255, 107, 107, .4);
+        }
+
+        .search-bar button:active {
+            transform: translateY(1px);
+            opacity: .9;
+        }
+
+        /* 建议列表容器（绝对定位，覆盖在页面上） */
+        .suggestions-container {
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            top: 100%;
+            /* 跟在搜索栏下方 */
+            z-index: 99;
+            margin-top: 6px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+            max-height: 320px;
+            overflow-y: auto;
+            display: none;
+            /* 默认隐藏 */
+        }
+
+        .suggestions-container.show {
+            display: block;
+        }
+
+        .suggestions-list {
+            list-style: none;
+            margin: 0;
+            padding: 6px 0;
+        }
+
+        .suggestions-list li {
+            padding: 10px 12px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #333;
+            cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            transition: background-color .15s;
+        }
+
+        .suggestions-list li:hover,
+        .suggestions-list li:focus {
+            background-color: #f7f7f7;
+            outline: none;
+        }
+
+        .suggestions-list li:active {
+            background-color: #f0f0f0;
+        }
+
+        /* 提示类 */
+        .suggestions-tip {
+            padding: 10px 12px;
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+        }
+
+        .suggestions-loading {
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+        }
+
+        /* 主内容区（示例：商品列表占位） */
+        .main-content {
+            padding: 16px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .06);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            background: #f5f5f5;
+        }
+
+        /* 底部导航 */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            min-width: 320px;
+            max-width: 540px;
+            margin: 0 auto;
+            background: rgba(34, 34, 34, .95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 8px 0;
+        }
+
+        .footer-nav ul {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            list-style: none;
+        }
+
+        .footer-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .footer-nav a:active {
+            opacity: .8;
+        }
+
+        .footer-nav .icon {
+            display: block;
+            margin: 0 auto 2px;
+            font-size: 16px;
+        }
+
+        /* 针对 iPhone 刘海屏等的安全区域 */
+        @supports (padding-bottom: constant(safe-area-inset-bottom)) {
+            .footer-nav {
+                padding-bottom: calc(8px + constant(safe-area-inset-bottom));
+            }
+        }
+
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .footer-nav {
+                padding-bottom: calc(8px + env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 搜索栏区域 -->
+        <header class="search-header">
+            <div class="search-bar">
+                <input type="text" name="keyword" placeholder="请输入关键词，如：连衣裙、手机">
+                <button type="button" id="searchBtn">搜索</button>
+            </div>
+            <div class="suggestions-container">
+                <ul class="suggestions-list"></ul>
+                <div class="suggestions-tip" style="display:none;">暂无相关建议</div>
+                <div class="suggestions-loading" style="display:none;">正在加载建议…</div>
+            </div>
+        </header>
+
+        <!-- 主内容区域（示例：商品列表占位） -->
+        <main class="main-content">
+            <h2 class="section-title">热门推荐</h2>
+            <div class="product-grid">
+                <!-- 示例商品卡片，实际可由接口渲染 -->
+                <article class="product-card">
+                    <img src="https://via.placeholder.com/150x150?text=Product1" alt="示例商品">
+                    <div>秋季新款连衣裙</div>
+                    <div>¥199</div>
+                </article>
+                <article class="product-card">
+                    <img src="https://via.placeholder.com/150x150?text=Product2" alt="示例商品">
+                    <div>新款运动鞋</div>
+                    <div>¥349</div>
+                </article>
+                <!-- 可以继续增加更多商品 -->
+            </div>
+        </main>
+
+        <!-- 底部导航 -->
+        <footer class="footer-nav">
+            <ul>
+                <li>
+                    <a href="/">
+                        <span class="icon">🏠</span>
+                        首页
+                    </a>
+                </li>
+                <li>
+                    <a href="/about">
+                        <span class="icon">ℹ️</span>
+                        关于我们
+                    </a>
+                </li>
+                <li>
+                    <a href="/contact">
+                        <span class="icon">📞</span>
+                        联系我们
+                    </a>
+                </li>
+            </ul>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            // 获取元素
+            var input = document.querySelector('.search-bar input[name="keyword"]');
+            var btn = document.querySelector('#searchBtn');
+            var suggestionsContainer = document.querySelector('.suggestions-container');
+            var suggestionsList = suggestionsContainer.querySelector('.suggestions-list');
+            var tipEl = suggestionsContainer.querySelector('.suggestions-tip');
+            var loadingEl = suggestionsContainer.querySelector('.suggestions-loading');
+
+            var timer = null;      // 防抖定时器
+            var currentScript = null; // 当前加载中的 JSONP script
+
+            // 隐藏建议列表
+            function hideSuggestions() {
+                suggestionsContainer.classList.remove('show');
+            }
+
+            // 显示建议列表
+            function showSuggestions() {
+                suggestionsContainer.classList.add('show');
+            }
+
+            // 清空建议列表
+            function clearSuggestions() {
+                suggestionsList.innerHTML = '';
+                tipEl.style.display = 'none';
+                loadingEl.style.display = 'none';
+            }
+
+            // 渲染建议列表
+            function renderSuggestions(items) {
+                clearSuggestions();
+                if (!items || !items.length) {
+                    tipEl.textContent = '暂无相关建议';
+                    tipEl.style.display = 'block';
+                    loadingEl.style.display = 'none';
+                    return;
+                }
+
+                var html = '';
+                items.forEach(function (item) {
+                    // 假设 item 是 [text, extra] 结构
+                    var text = Array.isArray(item) ? (item[0] || item[1]) : item;
+                    html += '<li tabindex="0" data-text="' + text + '">' + text + '</li>';
+                });
+                suggestionsList.innerHTML = html;
+                loadingEl.style.display = 'none';
+                showSuggestions();
+            }
+
+            // 全局回调函数（淘宝建议接口使用 JSONP）
+            window.myFunction = function (data) {
+                if (!data || !data.result) {
+                    renderSuggestions([]);
+                    return;
+                }
+                renderSuggestions(data.result);
+            };
+
+            // 移除之前的 JSONP script
+            function removeScript() {
+                if (currentScript && currentScript.parentNode) {
+                    currentScript.parentNode.removeChild(currentScript);
+                    currentScript = null;
+                }
+            }
+
+            // 发起搜索建议请求
+            function fetchSuggestions(keyword) {
+                if (!keyword) {
+                    hideSuggestions();
+                    clearSuggestions();
+                    return;
+                }
+
+                removeScript();
+                loadingEl.textContent = '正在加载建议…';
+                loadingEl.style.display = 'block';
+                tipEl.style.display = 'none';
+                showSuggestions();
+
+                var script = document.createElement('script');
+                script.src = 'https://suggest.taobao.com/sug?code=utf-8&q=' + encodeURIComponent(keyword) + '&callback=myFunction';
+                script.onerror = function () {
+                    loadingEl.style.display = 'none';
+                    tipEl.textContent = '加载建议失败，请重试';
+                    tipEl.style.display = 'block';
+                };
+                document.body.appendChild(script);
+                currentScript = script;
+            }
+
+            // 防抖搜索建议
+            function debounceFetch(keyword) {
+                if (timer) {
+                    clearTimeout(timer);
+                    timer = null;
+                }
+                timer = setTimeout(function () {
+                    fetchSuggestions(keyword);
+                }, 300);
+            }
+
+            // 点击外部区域关闭建议列表
+            document.addEventListener('click', function (e) {
+                if (!suggestionsContainer.contains(e.target) && !e.target.closest('.search-bar')) {
+                    hideSuggestions();
+                }
+            });
+
+            // 输入框内容改变时实时请求建议
+            input.addEventListener('input', function () {
+                var keyword = this.value.trim();
+                debounceFetch(keyword);
+            });
+
+            // 点击搜索按钮
+            btn.addEventListener('click', function () {
+                var keyword = input.value.trim();
+                if (!keyword) {
+                    alert('请输入搜索关键词');
+                    return;
+                }
+                // 实际项目中可在此处跳转到搜索结果页
+                alert('模拟搜索：' + keyword);
+                hideSuggestions();
+            });
+
+            // 回车触发搜索
+            input.addEventListener('keydown', function (e) {
+                if (e.keyCode === 13) {
+                    btn.click();
+                }
+            });
+
+            // 点击建议项
+            suggestionsList.addEventListener('click', function (e) {
+                var li = e.target.closest('li');
+                if (!li) return;
+                var text = li.getAttribute('data-text');
+                if (!text) return;
+                input.value = text;
+                hideSuggestions();
+                btn.click();
+            });
+
+            // 键盘操作建议项（可选，增强体验）
+            suggestionsList.addEventListener('keydown', function (e) {
+                if (e.keyCode === 13 || e.keyCode === 32) { // Enter 或 Space
+                    e.preventDefault();
+                    e.target.click();
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>
